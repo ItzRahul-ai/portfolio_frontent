@@ -32,3 +32,5 @@ export const adminApi = {
   inquiries: (params = {}) => api.get("/admin/inquiries", { params }),
   updateInquiry: (id, payload) => api.patch(`/admin/inquiries/${id}`, payload),
 };
+
+export const fetchEnquiry = () => fetch(`${import.meta.env.VITE_API_URL}/api/enquiry`);
