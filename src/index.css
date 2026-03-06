@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@500;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #070915;
+    --surface: rgba(18, 24, 44, 0.72);
+    --text: #e9efff;
+    --muted: #9aa7c9;
+    --accent: #37e2ff;
+    --line: rgba(255, 255, 255, 0.12);
+    --btn-primary-bg: linear-gradient(130deg, #0ea5e9, #2563eb);
+    --btn-primary-border: rgba(125, 211, 252, 0.5);
+    --btn-primary-text: #ecfeff;
+    --btn-ghost-bg: rgba(255, 255, 255, 0.07);
+    --btn-ghost-border: rgba(255, 255, 255, 0.16);
+    --btn-ghost-text: #e9efff;
+    --input-bg: rgba(0, 0, 0, 0.25);
+    --input-border: rgba(255, 255, 255, 0.18);
+    --input-focus-ring: rgba(56, 189, 248, 0.35);
+    --trail-dot: rgba(103, 232, 249, 0.9);
+    --bg-glow-1: rgba(63, 110, 255, 0.3);
+    --bg-glow-2: rgba(55, 226, 255, 0.22);
+    --bg-glow-3: rgba(137, 69, 255, 0.18);
+  }
+
+  [data-theme="light"] {
+    --bg: #f7faff;
+    --surface: rgba(255, 255, 255, 0.9);
+    --text: #0f1b38;
+    --muted: #5d6e94;
+    --accent: #2150db;
+    --line: rgba(20, 46, 97, 0.15);
+    --btn-primary-bg: linear-gradient(130deg, #2563eb, #4f46e5);
+    --btn-primary-border: rgba(37, 99, 235, 0.4);
+    --btn-primary-text: #f8fbff;
+    --btn-ghost-bg: rgba(255, 255, 255, 0.88);
+    --btn-ghost-border: rgba(27, 59, 128, 0.2);
+    --btn-ghost-text: #0f1b38;
+    --input-bg: rgba(255, 255, 255, 0.95);
+    --input-border: rgba(26, 59, 124, 0.26);
+    --input-focus-ring: rgba(37, 99, 235, 0.26);
+    --trail-dot: rgba(37, 99, 235, 0.85);
+    --bg-glow-1: rgba(90, 150, 255, 0.26);
+    --bg-glow-2: rgba(0, 199, 255, 0.18);
+    --bg-glow-3: rgba(139, 92, 246, 0.16);
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Syne", sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .page-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(60rem 30rem at 15% 0%, var(--bg-glow-1), transparent 55%),
+      radial-gradient(50rem 26rem at 95% 20%, var(--bg-glow-2), transparent 58%),
+      radial-gradient(70rem 35rem at 50% 100%, var(--bg-glow-3), transparent 65%),
+      var(--bg);
+  }
+
+  .glass-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: 0 14px 40px rgba(3, 8, 24, 0.35);
+    backdrop-filter: blur(12px);
+  }
+
+  .button-primary {
+    border: 1px solid var(--btn-primary-border);
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    @apply rounded-xl px-4 py-2 text-sm font-semibold transition duration-200 hover:-translate-y-[1px] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70;
+  }
+
+  .button-ghost {
+    border: 1px solid var(--btn-ghost-border);
+    background: var(--btn-ghost-bg);
+    color: var(--btn-ghost-text);
+    @apply rounded-xl px-4 py-2 text-sm font-semibold transition duration-200 hover:-translate-y-[1px] hover:brightness-105;
+  }
+
+  .input-field {
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    @apply w-full rounded-xl px-3 py-2 text-sm text-[var(--text)] placeholder:text-[var(--muted)] outline-none transition focus:ring-2;
+    --tw-ring-color: var(--input-focus-ring);
+  }
+
+  .trail-dot {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background: var(--trail-dot);
+    box-shadow: 0 0 18px var(--trail-dot);
+    opacity: 0;
+    transform: translate(-999px, -999px);
+    will-change: transform, opacity;
+  }
+}
+
+.font-display {
+  font-family: "Syne", sans-serif;
+}
