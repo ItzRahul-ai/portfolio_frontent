@@ -1,6 +1,15 @@
 import axios from "axios";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const normalizeBaseUrl = (rawUrl) => {
+  const cleaned = String(rawUrl || "").trim().replace(/\/+$/, "");
+  if (!cleaned) {
+    return "/api";
+  }
+
+  return cleaned.endsWith("/api") ? cleaned : `${cleaned}/api`;
+};
+
+const API_BASE_URL = normalizeBaseUrl(import.meta.env.VITE_API_URL);
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -33,4 +42,4 @@ export const adminApi = {
   updateInquiry: (id, payload) => api.patch(`/admin/inquiries/${id}`, payload),
 };
 
-export const fetchEnquiry = () => fetch(`${import.meta.env.VITE_API_URL}/api/enquiry`);
+export const fetchEnquiry = () => fetch(`${API_BASE_URL}/inquiries`);
