@@ -11,6 +11,11 @@ const normalizeBaseUrl = (rawUrl) => {
 
 const API_BASE_URL = normalizeBaseUrl(import.meta.env.VITE_API_URL);
 
+if (!import.meta.env.VITE_API_URL && import.meta.env.PROD) {
+  // eslint-disable-next-line no-console
+  console.warn("VITE_API_URL is missing. Frontend requests will default to '/api'.");
+}
+
 export const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 15000,
@@ -41,5 +46,3 @@ export const adminApi = {
   inquiries: (params = {}) => api.get("/admin/inquiries", { params }),
   updateInquiry: (id, payload) => api.patch(`/admin/inquiries/${id}`, payload),
 };
-
-export const fetchEnquiry = () => fetch(`${API_BASE_URL}/inquiries`);

@@ -18,7 +18,7 @@ const readApiErrorMessage = (error) => {
   }
 
   if (error?.code === "ERR_NETWORK") {
-    return "Backend API is unreachable. Start backend server and verify VITE_API_URL.";
+    return "Backend API is unreachable. Check Render service status and verify VITE_API_URL.";
   }
 
   return error?.message || "Authentication request failed";
